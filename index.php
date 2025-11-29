@@ -20,13 +20,6 @@ $parts_config = [
     'kepala' => 6
 ];
 
-// buat reset
-if (isset($_GET['reset_session'])) {
-    unset($_SESSION['avatar']);
-    header("Location: index.php");
-    exit;
-}
-
 // baca pilihan saat ini dari session atau default
 $current = $_SESSION['avatar'] ?? $defaults;
 
@@ -49,7 +42,7 @@ if(!empty($_GET)) {
     exit;
 }
 
-$_SESSION['avatar'] = $current;
+$_SESSION['avatar'] = $defaults;
 
 // mastiin pilihan
 foreach ($parts_config as $category => $max) {
