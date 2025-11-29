@@ -20,18 +20,29 @@ $parts_config = [
     'kepala' => 6
 ];
 
-// baca pilihan saat ini dari URL 
+// buat reset
+if (isset($_GET['reset_session'])) {
+    unset($_SESSION['avatar']);
+    header("Location: index.php");
+    exit;
+}
+
+// baca pilihan saat ini dari session atau default
 $current = $_SESSION['avatar'] ?? $defaults;
 
 if(!empty($_GET)) {
-    unset($_SESSION['avatar']['bgColor']);
-    unset($current['bgColor']);
-
     foreach ($defaults as $key => $value) {
-        if ($key !== 'bgColor' && isset($_GET[$key])) {
+        if (isset($_GET[$key])) {
             $current[$key] = $_GET[$key];
         }
     }
+    
+    if (isset($_GET['bgColor'])) {
+         $current['bgColor'] = $_GET['bgColor'];
+    } else if (!isset($_GET['bgColor']) && isset($_SESSION['avatar']['bgColor'])) {
+         $current['bgColor'] = $_SESSION['avatar']['bgColor'];
+    }
+
     $_SESSION['avatar'] = $current;
 
     header("Location: index.php");
@@ -54,13 +65,13 @@ function generate_slider_items($category, $max, $current_parts) {
     for ($i = 1; $i <= $max; $i++) {
         $query_parts = $current_parts;
         $query_parts[$category] = $i;
-        $query_string = http_build_query($query_parts);
         
+        $query_string = http_build_query($query_parts);
         $active_class = ($current_parts[$category] == $i) ? 'active' : '';
         
         $fileName = "{$CategoryName} {$i}.png";
         $filePath = "assets/{$category}/" . rawurlencode($fileName);
-        
+
         $output .= "<a href='index.php?{$query_string}' class='slider-item {$active_class}'>";
         $output .= "<img src='{$filePath}' alt='{$CategoryName} {$i}'>";
         $output .= "</a>";
@@ -81,10 +92,10 @@ function generate_slider_items($category, $max, $current_parts) {
 
     <header>
         <div class="header-circles-container">
-            <div class="avatar-circle top-left" style="background-color: #f7e0e7;"></div>
-            <div class="avatar-circle bottom-left" style="background-color: #faebd7;"></div>
-            <div class="avatar-circle top-right" style="background-color: #cce0f5;"></div>
-            <div class="avatar-circle bottom-right" style="background-color: #fce8d5;"></div>
+            <img src="assets/avatar/ava1.png" class="avatar-circle top-left">
+            <img src="assets/avatar/ava2.png" class="avatar-circle bottom-left">
+            <img src="assets/avatar/ava3.png" class="avatar-circle top-right">
+            <img src="assets/avatar/ava4.png" class="avatar-circle bottom-right">
         </div>
 
         <div class="header-content">
@@ -116,16 +127,13 @@ function generate_slider_items($category, $max, $current_parts) {
                     <img id="kepala-part" class="avatar-layer" style="z-index: 35;" 
                         src="assets/kepala/Kepala <?php echo $current['kepala'];?>.png" alt="Kepala">
                         
-                    <img id="display-frame" class="avatar-layer" style="z-index: 99;"  
-                         onerror="this.style.display='none'">
-                </div>
+                    </div>
             </div>
             
             <div class="color-picker-section">
                 <span class="color-text">Anda dapat mengganti warna latar belakang:</span>
                 
-                <input type="color" id="bg-color-picker" 
-                    value="#ffffff">
+                <input type="color" id="bg-color-picker" value="<?php echo $current['bgColor'] ?? '#ffffff'; ?>">
             </div>
         </div>
 
@@ -163,7 +171,7 @@ function generate_slider_items($category, $max, $current_parts) {
 
     <footer>
         <div class="footer-content">
-            <p>Design by: **Aida Rosyid** | Code by: **Key Riella**</p>
+            <p>Design by: Aida Rosyid | Code by: Ryuki Riella</p>
         </div>
     </footer>
 
