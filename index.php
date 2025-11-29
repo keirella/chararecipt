@@ -85,7 +85,7 @@ function generate_slider_items($category, $max, $current_parts) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chararecipt - Avatar Maker</title>
+    <title>Charareceipt - Avatar Maker</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -99,7 +99,7 @@ function generate_slider_items($category, $max, $current_parts) {
         </div>
 
         <div class="header-content">
-            <h1>CHARARECIPT</h1>
+            <h1>CHARARECEIPT</h1>
             <p>Temukan jati diri dan pilih karakter yang paling mencerminkan gayamu!</p>
         </div>
     </header>
