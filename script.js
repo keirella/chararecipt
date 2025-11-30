@@ -103,7 +103,7 @@ document.getElementById("download-btn").addEventListener("click", () => {
             
             // download Kanvas Akhir
             const link = document.createElement("a");
-            link.download = "chararecipt.png"; 
+            link.download = "charareceipt.png"; 
             link.href = finalCanvas.toDataURL("image/png"); 
             link.click();
 
