@@ -61,17 +61,9 @@ function generate_slider_items($category, $max, $current_parts) {
 <body>
 
     <header>
-        <div class="header-circles-container">
-            <img src="assets/avatar/ava1.png" class="avatar-circle top-left">
-            <img src="assets/avatar/ava2.png" class="avatar-circle bottom-left">
-            <img src="assets/avatar/ava3.png" class="avatar-circle top-right">
-            <img src="assets/avatar/ava4.png" class="avatar-circle bottom-right">
-        </div>
-
         <div class="header-content">
             <h1>CHARARECEIPT</h1>
-            <p>Temukan jati diri dan pilih karakter</p>
-            <p>yang paling mencerminkan gayamu!</p>
+            <p>Temukan jati diri dan pilih karakter yang paling mencerminkan gayamu!</p>
         </div>
     </header>
 
